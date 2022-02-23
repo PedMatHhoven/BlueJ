@@ -1,4 +1,4 @@
-package MeineFigur;
+package Weihnachtsbaum;
 
 import java.awt.Polygon;
 

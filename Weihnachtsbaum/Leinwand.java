@@ -1,4 +1,4 @@
-package MeineFigur;
+package Weihnachtsbaum;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -45,7 +45,7 @@ public class Leinwand {
      */
     public static Leinwand gibLeinwand() {
         if (leinwandSingleton == null) {
-            leinwandSingleton = new Leinwand("BlueJ Figuren Demo", 500, 300,
+            leinwandSingleton = new Leinwand("BlueJ Bild Demo", 500, 300,
                     Color.white);
         }
         leinwandSingleton.setzeSichtbarkeit(true);
@@ -154,28 +154,25 @@ public class Leinwand {
      *            der Name der neuen Zeichenfarbe.
      */
     public void setzeZeichenfarbe(String farbname) {
-        if(farbname.equals("rot")) {
+        if (farbname.equals("rot")) {
             graphic.setColor(new Color(235, 25, 25));
-        }
-        else if(farbname.equals("schwarz")) {
+        } else if (farbname.equals("schwarz")) {
             graphic.setColor(Color.black);
-        }
-        else if(farbname.equals("blau")) {
+        } else if (farbname.equals("blau")) {
             graphic.setColor(new Color(30, 75, 220));
-        }
-        else if(farbname.equals("gelb")) {
+        } else if (farbname.equals("gelb")) {
             graphic.setColor(new Color(255, 230, 0));
-        }
-        else if(farbname.equals("gruen")) {
+        } else if (farbname.equals("gruen")) {
             graphic.setColor(new Color(80, 160, 60));
-        }
-        else if(farbname.equals("lila")) {
+        } else if (farbname.equals("lila")) {
             graphic.setColor(Color.magenta);
-        }
-        else if(farbname.equals("weiss")) {
+        } else if (farbname.equals("braun")) {
+            graphic.setColor(new Color(205,133,63));
+        } else if (farbname.equals("vollbraun")) {
+            graphic.setColor(new Color(139,69,19));
+        } else if (farbname.equals("weiss")) {
             graphic.setColor(Color.white);
-        }
-        else {
+        } else {
             graphic.setColor(Color.black);
         }
     }
