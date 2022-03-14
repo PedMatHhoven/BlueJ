@@ -1,4 +1,4 @@
-package Auto;
+package Auto_Profi;
 
 import javax.swing.*;
 import java.awt.*;

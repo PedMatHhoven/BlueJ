@@ -1,4 +1,4 @@
-package Auto;
+package Auto_Profi;
 import java.awt.*;
 
 public class Rechteck {
