@@ -1,4 +1,4 @@
-package Auto;
+package Auto_Profi;
 //@Autor: Benedikt Heffels
 //@Version: Verbesserungen/Vereinfachungen (Profi-Version)
 public class Auto {

@@ -1,38 +1,46 @@
-package Auto;
+package Vererbung_Profi;
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.Shape;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
 /**
- * Original.Leinwand ist eine Klasse, die einfache Zeichenoperationen auf einer
- * leinwandartigen ZeichenflÃ¤che ermÃ¶glicht. Sie ist eine vereinfachte Version
- * der Klasse Canvas (englisch fÃ¼r Original.Leinwand) des JDK und wurde speziell fÃ¼r das
+ * Leinwand ist eine Klasse, die einfache Zeichenoperationen auf einer
+ * leinwandartigen Zeichenfläche ermöglicht. Sie ist eine vereinfachte Version
+ * der Klasse Canvas (englisch für Leinwand) des JDK und wurde speziell für das
  * Projekt "Figuren" geschrieben.
- *
- *
+ * 
+ * 
  * @author: Bruce Quig
- * @author: Michael KÃ¶lling (mik)
+ * @author: Michael Kölling (mik)
  * @author: Axel Schmolitzky
- *
+ * 
  * @version: 31.07.2011
  */
 public class Leinwand {
     // Hinweis: Die Implementierung dieser Klasse (insbesondere die
-    // Verwaltung der Farben und IdentitÃ¤ten der Figuren) ist etwas
+    // Verwaltung der Farben und Identitäten der Figuren) ist etwas
     // komplizierter als notwendig. Dies ist absichtlich so, weil damit
     // die Schnittstellen und Exemplarvariablen der Figuren-Klassen
-    // fÃ¼r den Lernanspruch dieses Projekts einfacher und klarer
-    // sein kÃ¶nnen.
+    // für den Lernanspruch dieses Projekts einfacher und klarer
+    // sein können.
 
     private static Leinwand leinwandSingleton;
 
     /**
      * Fabrikmethode, die eine Referenz auf das einzige Exemplar dieser Klasse
-     * zurÃ¼ckliefert. Wenn es von einer Klasse nur genau ein Exemplar gibt, wird
+     * zurückliefert. Wenn es von einer Klasse nur genau ein Exemplar gibt, wird
      * dieses als 'Singleton' bezeichnet.
      */
     public static Leinwand gibLeinwand() {
@@ -59,18 +67,18 @@ public class Leinwand {
     private List<Object> figuren;
 
     private Map<Object, ShapeMitFarbe> figurZuShape;
-
+    
     /**
-     * Erzeuge eine Original.Leinwand.
-     *
+     * Erzeuge eine Leinwand.
+     * 
      * @param titel
-     *            Titel, der im Rahmen der Original.Leinwand angezeigt wird
+     *            Titel, der im Rahmen der Leinwand angezeigt wird
      * @param breite
-     *            die gewÃ¼nschte Breite der Original.Leinwand
+     *            die gewünschte Breite der Leinwand
      * @param hoehe
-     *            die gewÃ¼nschte HÃ¶he der Original.Leinwand
+     *            die gewünschte Höhe der Leinwand
      * @param grundfarbe
-     *            die Hintergrundfarbe der Original.Leinwand
+     *            die Hintergrundfarbe der Leinwand
      */
     private Leinwand(String titel, int breite, int hoehe, Color grundfarbe) {
         fenster = new JFrame();
@@ -86,18 +94,18 @@ public class Leinwand {
     }
 
     /**
-     * Setze, ob diese Original.Leinwand sichtbar sein soll oder nicht. Wenn die Original.Leinwand
+     * Setze, ob diese Leinwand sichtbar sein soll oder nicht. Wenn die Leinwand
      * sichtbar gemacht wird, wird ihr Fenster in den Vordergrund geholt. Diese
      * Operation kann auch benutzt werden, um ein bereits sichtbares
      * Leinwandfenster in den Vordergrund (vor andere Fenster) zu holen.
-     *
+     * 
      * @param sichtbar
-     *            boolean fÃ¼r die gewÃ¼nschte Sichtbarkeit: true fÃ¼r sichtbar,
-     *            false fÃ¼r nicht sichtbar.
+     *            boolean für die gewünschte Sichtbarkeit: true für sichtbar,
+     *            false für nicht sichtbar.
      */
     public void setzeSichtbarkeit(boolean sichtbar) {
         if (graphic == null) {
-            // erstmaliger Aufruf: erzeuge das Bildschirm-Image und fÃ¼lle
+            // erstmaliger Aufruf: erzeuge das Bildschirm-Image und fülle
             // es mit der Hintergrundfarbe
             Dimension size = zeichenflaeche.getSize();
             leinwandImage = zeichenflaeche.createImage(size.width, size.height);
@@ -110,26 +118,26 @@ public class Leinwand {
     }
 
     /**
-     * Zeichne fÃ¼r das gegebene Figur-Objekt eine Java-Figur (einen Shape) auf
-     * die Original.Leinwand.
-     *
+     * Zeichne für das gegebene Figur-Objekt eine Java-Figur (einen Shape) auf
+     * die Leinwand.
+     * 
      * @param figur
-     *            das Figur-Objekt, fÃ¼r das ein Shape gezeichnet werden soll
+     *            das Figur-Objekt, für das ein Shape gezeichnet werden soll
      * @param farbe
      *            die Farbe der Figur
      * @param shape
-     *            ein Objekt der Klasse Shape, das tatsÃ¤chlich gezeichnet wird
+     *            ein Objekt der Klasse Shape, das tatsächlich gezeichnet wird
      */
     public void zeichne(Object figur, String farbe, Shape shape) {
         figuren.remove(figur); // entfernen, falls schon eingetragen
-        figuren.add(figur); // am Ende hinzufÃ¼gen
+        figuren.add(figur); // am Ende hinzufügen
         figurZuShape.put(figur, new ShapeMitFarbe(shape, farbe));
         erneutZeichnen();
     }
 
     /**
-     * Entferne die gegebene Figur von der Original.Leinwand.
-     *
+     * Entferne die gegebene Figur von der Leinwand.
+     * 
      * @param figur
      *            die Figur, deren Shape entfernt werden soll
      */
@@ -140,8 +148,8 @@ public class Leinwand {
     }
 
     /**
-     * Setze die Zeichenfarbe der Original.Leinwand.
-     *
+     * Setze die Zeichenfarbe der Leinwand.
+     * 
      * @param farbname
      *            der Name der neuen Zeichenfarbe.
      */
@@ -161,9 +169,6 @@ public class Leinwand {
         else if(farbname.equals("gruen")) {
             graphic.setColor(new Color(80, 160, 60));
         }
-        else if(farbname.equals("glas")) {
-            graphic.setColor(new Color(121, 174, 191));
-        }
         else if(farbname.equals("lila")) {
             graphic.setColor(Color.magenta);
         }
@@ -176,9 +181,9 @@ public class Leinwand {
     }
 
     /**
-     * Warte fÃ¼r die angegebenen Millisekunden. Mit dieser Operation wird eine
-     * VerzÃ¶gerung definiert, die fÃ¼r animierte Zeichnungen benutzt werden kann.
-     *
+     * Warte für die angegebenen Millisekunden. Mit dieser Operation wird eine
+     * Verzögerung definiert, die für animierte Zeichnungen benutzt werden kann.
+     * 
      * @param millisekunden
      *            die zu wartenden Millisekunden
      */
@@ -191,7 +196,7 @@ public class Leinwand {
     }
 
     /**
-     * Zeichne erneut alle Figuren auf der Original.Leinwand.
+     * Zeichne erneut alle Figuren auf der Leinwand.
      */
     private void erneutZeichnen() {
         loeschen();
@@ -202,7 +207,7 @@ public class Leinwand {
     }
 
     /**
-     * LÃ¶sche die gesamte Original.Leinwand.
+     * Lösche die gesamte Leinwand.
      */
     private void loeschen() {
         Color original = graphic.getColor();
@@ -213,9 +218,9 @@ public class Leinwand {
     }
 
     /***************************************************************************
-     * Interne Klasse Zeichenflaeche - die Klasse fÃ¼r die GUI-Komponente, die
-     * tatsÃ¤chlich im Original.Leinwand-Fenster angezeigt wird. Diese Klasse definiert
-     * ein JPanel mit der zusÃ¤tzlichen MÃ¶glichkeit, das auf ihm gezeichnet Image
+     * Interne Klasse Zeichenflaeche - die Klasse für die GUI-Komponente, die
+     * tatsächlich im Leinwand-Fenster angezeigt wird. Diese Klasse definiert
+     * ein JPanel mit der zusätzlichen Möglichkeit, das auf ihm gezeichnet Image
      * aufzufrischen (erneut zu zeichnen).
      */
     private class Zeichenflaeche extends JPanel {
@@ -228,7 +233,7 @@ public class Leinwand {
 
     /***************************************************************************
      * Interne Klasse ShapeMitFarbe - Da die Klasse Shape des JDK nicht auch
-     * eine Farbe mitverwalten kann, muss mit dieser Klasse die VerknÃ¼pfung
+     * eine Farbe mitverwalten kann, muss mit dieser Klasse die Verknüpfung
      * modelliert werden.
      */
     private class ShapeMitFarbe {
